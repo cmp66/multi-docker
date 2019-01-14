@@ -3,16 +3,16 @@ services:
   - docker
 
 before-install:
-  - docker build -t carlphil/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t wahoo66/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run carlphil/react-test npm test -- --coverage
+  - docker run wahoo66/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t carlphil/multi-client ./client
-  - docker build -t carlphil/multi-nginx ./nginx
-  - docker build -t carlphil/multi-server ./server
-  - docker build -t carlphil/multi-worker ./worker
+  - docker build -t wahoo66/multi-client ./client
+  - docker build -t wahoo66/multi-nginx ./nginx
+  - docker build -t wahoo66/multi-server ./server
+  - docker build -t wahoo66/multi-worker ./worker
 
   # login to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
