@@ -1,0 +1,24 @@
+sudo: required
+services:
+  - docker
+
+before-install:
+  - docker build -t carlphil/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run carlphil/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t carlphil/multi-client ./client
+  - docker build -t carlphil/multi-nginx ./nginx
+  - docker build -t carlphil/multi-server ./server
+  - docker build -t carlphil/multi-worker ./worker
+
+  # login to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # push to dockerhub
+  - docker push carlphil/multi-client
+  - docker push carlphil/multi-nginx
+  - docker push carlphil/multi-server
+  - docker push carlphil/multi-worker
