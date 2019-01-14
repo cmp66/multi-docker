@@ -18,7 +18,7 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # push to dockerhub
-  - docker push carlphil/multi-client
-  - docker push carlphil/multi-nginx
-  - docker push carlphil/multi-server
-  - docker push carlphil/multi-worker
+  - docker push wahoo66/multi-client
+  - docker push wahoo66/multi-nginx
+  - docker push wahoo66/multi-server
+  - docker push wahoo66/multi-worker
